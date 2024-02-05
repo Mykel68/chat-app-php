@@ -15,7 +15,7 @@
                 <input
                     type="email"
                     class="form-control"
-                    name=""
+                    name="email"
                     id=""
                     aria-describedby="helpId"
                     placeholder=""
@@ -26,7 +26,7 @@
                 <input
                     type="password"
                     class="form-control"
-                    name=""
+                    name="password"
                     id=""
                     aria-describedby="helpId"
                     placeholder=""
