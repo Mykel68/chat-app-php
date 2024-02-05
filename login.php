@@ -32,6 +32,7 @@
                     placeholder=""
                 />
             </div>
+            <input type="submit" value="Login">
             
         </form>
 
