@@ -12,6 +12,7 @@
 <body>
     <div class="d-flex flex-column bg-primary  p-2 min-vh-100">
         <form action="login_process.php" method="post" class=" mx-auto mt-5 bg-gradient p-5 border-ra">
+        <h1 class="text-center">Login</h1>
 
         <?php
         session_start();

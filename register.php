@@ -9,7 +9,15 @@
 </head>
 <body>
     <div class="container mt-5">
+        <h1>Register</h1>
         <form action="register_process.php" method="post" enctype="multipart/form-data">
+        <?php
+        session_start();
+        if (isset($_SESSION['error_message'])) {
+            echo '<div class="alert alert-danger mt-2" role="alert">' . $_SESSION['error_message'] . '</div>';
+            unset($_SESSION['error_message']);
+        }
+        ?>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input

@@ -28,22 +28,21 @@ body{
     margin: 5px;
 }
 .sidebar{
-    width: 200px;
-
+    width: 350px;
 }
 .sidebar ul{
     text-decoration: none;
 }
 .sidebar ul li{
+    width: 200px;
     background-color: gray;
     color: #fff;
-    height: auto;
     margin-bottom: 3px;
     list-style: none;
     padding: 5px;
     display: flex;
     color: #fff;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 .sidebar ul li img{
@@ -69,4 +68,41 @@ body{
 }
 .chat-container{
     width: calc(100% - 200px);
+}
+.recieve-msg{
+    display: flex;
+    background-color: #123;
+    color: #ffe;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 0px 10px 10px;
+    max-width: 400px;
+    width: fit-content;
+}
+.sent{
+    display: flex;
+    flex-direction: column;
+}
+.sent-msg{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #231;
+    color: #fee;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px 10px 0px;
+    max-width: 400px;
+    margin-left: 650px;
+    width: fit-content;
+}
+.time{
+    margin-top: 40px;
+}
+.msg-time{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 10px;
 }

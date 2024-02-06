@@ -8,7 +8,7 @@ if (!isset($_SESSION['id'])) {
 // Retrieve the user ID of the currently logged-in user
 $currentUserId = $_SESSION['id'];
 
-// Retrieve all users from the database excluding the current user
+// Retrieve the current user from the database
 $sql = "SELECT * FROM users WHERE id = ?";
 
 // Use prepared statement to prevent SQL injection

@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Example: Check if password and confirm password match
     if ($password !== $confirmPassword) {
-        echo "Passwords do not match. Please try again.";
+        $_SESSION['error_message'] = "Passwords do not match. Please try again.";
+        header("Location: register.php");
         exit;
     }
 
@@ -23,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultCheckEmail = $stmtCheckEmail->get_result();
 
     if ($resultCheckEmail->num_rows > 0) {
-        echo "Email is already registered. Please use a different email address.";
+        $_SESSION['error_message'] = "Email is already registered. Please use a different email address.";
+        header("Location: register.php");
         exit;
     }
 
@@ -35,12 +37,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultCheckUsername = $stmtCheckUsername->get_result();
 
     if ($resultCheckUsername->num_rows > 0) {
-        echo "Username is not available. Please choose a different username.";
+        $_SESSION['error_message'] = "Username is not available. Please choose a different username.";
+        header("Location: register.php");
         exit;
     }
 
     // Handle image file upload
-    // (Your existing image upload code)
+    $targetDir = "uploads/";
+    $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
+    if ($check === false) {
+        $_SESSION['error_message'] = "File is not an image.";
+        header("Location: register.php");
+        exit;
+    }
+
+    // Check file size
+    if ($_FILES["profilePicture"]["size"] > 500000) {
+        $_SESSION['error_message'] = "Sorry, your file is too large.";
+        header("Location: register.php");
+        exit;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+        $_SESSION['error_message'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        header("Location: register.php");
+        exit;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        $_SESSION['error_message'] = "Sorry, your file was not uploaded.";
+        header("Location: register.php");
+        exit;
+    } else {
+        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
+        } else {
+            $_SESSION['error_message'] = "Sorry, there was an error uploading your file.";
+            header("Location: register.php");
+            exit;
+        }
+    }
 
     // Example: Insert user data into the database without hashing the password
     $sql = "INSERT INTO users (username, email, password, image) VALUES (?, ?, ?, ?)";
@@ -55,7 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
         echo "Registration successful! User data inserted into the database.";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $_SESSION['error_message'] = "Error: " . $sql . "<br>" . $conn->error;
+        header("Location: register.php");
+        exit;
     }
 
     // Close the statement and connection
