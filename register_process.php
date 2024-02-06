@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password']; 
     $confirmPassword = $_POST['confirmPassword'];
 
-
     // Example: Check if password and confirm password match
     if ($password !== $confirmPassword) {
         echo "Passwords do not match. Please try again.";
@@ -27,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Email is already registered. Please use a different email address.";
         exit;
     }
+
     // Handle image file upload
     $targetDir = "uploads/";
     $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
@@ -67,12 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Example: Insert user data into the database
     $sql = "INSERT INTO users (username, email, password, image) VALUES (?, ?, ?, ?)";
-    
+
     // Use prepared statement to prevent SQL injection
     $stmt = $conn->prepare($sql);
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $stmt->bind_param("ssss", $username, $email, $hashedPassword, $targetFile);
 
+    // Bind parameters
+    $stmt->bind_param("ssss", $username, $email, $password, $targetFile);
 
     // Execute the statement
     if ($stmt->execute()) {

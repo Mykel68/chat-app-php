@@ -8,29 +8,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     if (empty($email) || empty($password)) {
-        echo "Both email and password are required.";
+        $_SESSION['error_message'] = "Both email and password are required.";
+        header("Location: login.php");
         exit;
     }
 
-    // Example: Retrieve user data from the database
+    // Retrieve user data from the database
     $sql = "SELECT * FROM users WHERE email = ?";
-    
+
     // Use prepared statement to prevent SQL injection
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
 
     // Execute the statement
     $stmt->execute();
-    
+
     // Get the result
     $result = $stmt->get_result();
 
-    // Check if the user exists and the password is correct
+    // Check if the user exists
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
         // Verify the password
-        if (password_verify($password, $user['password'])) {
+        if ($user !== null && password_verify($password, $user['password'])) {
             // Save user information in session
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
@@ -40,12 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: index.php");
             exit;
         } else {
-            echo "Invalid email or password. Please try again.";
+            $_SESSION['error_message'] = "Invalid password. Please try again.";
             header("Location: login.php");
+            exit;
         }
     } else {
-        echo "Invalid email or password. Please try again.";
+        $_SESSION['error_message'] = "Invalid email or password. Please try again.";
         header("Location: login.php");
+        exit;
     }
 
     // Close the statement and connection
