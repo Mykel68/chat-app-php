@@ -69,6 +69,26 @@ body{
 .chat-container{
     width: calc(100% - 200px);
 }
+#chat-top-bar-username{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #fee;
+}
+.chat-body{
+    height: calc(80vh - 100px);
+    overflow-y: scroll;
+}
+.chat-body::-webkit-scrollbar-thumb{
+    background-color: #111;
+    width: 20px;
+}
+.chat-body::-webkit-scrollbar{
+    width: 10px;
+    background-color: gray;
+    border-radius: 10px;
+
+}
 .recieve-msg{
     display: flex;
     background-color: #123;
@@ -97,12 +117,42 @@ body{
     max-width: 400px;
     margin-left: 650px;
     width: fit-content;
+    flex-wrap: wrap;
 }
-.time{
+.recieve-time{
     margin-top: 40px;
+}
+.sent-time{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 10px;
+    margin-left: 70px;
 }
 .msg-time{
     display: flex;
     justify-content: flex-end;
     font-size: 10px;
+}
+.chat-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid white;
+    padding: 5px;
+
+}
+.chat-input input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+.chat-input button{
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #123;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
 }

@@ -29,8 +29,8 @@ if ($result->num_rows > 0) {
     // Output the current user information
     echo '<div class="chat-top-bar ps-2">';
     echo '<div class="chat-top-bar-right">';
-    echo '<img src="' . $currentUser['image'] . '" alt="">';
-    echo '<p>' . $currentUser['username'] . '</p>';
+    echo '<img id="chat-top-bar-image" src="' . $currentUser['image'] . '" alt="">';
+    echo '<p id="chat-top-bar-username">' . $currentUser['username'] . '</p>';
     echo '</div>';
     echo '<div class="profile">';
     echo '<img src="' . $currentUser['image'] . '" alt="">';

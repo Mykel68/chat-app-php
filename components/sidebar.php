@@ -34,14 +34,14 @@ if ($result->num_rows > 0) {
 
     foreach ($users as $user) {
         echo '<li>';
-        // Add an onclick event to each user's image
-        echo '<img src="' . $user['image'] . '" alt="" onclick="selectUser(' . $user['id'] . ')">';
+        echo '<img src="' . $user['image'] . '" alt="" onclick="startChatWithUser(' . $user['id'] . ', \'' . $user['username'] . '\')">';
         echo '<div class="online">';
         echo '<div class="online-presence"></div>';
         echo '<p> ' . $user['username'] . '</p>';
         echo '</div>';
         echo '</li>';
     }
+    
 
     echo '</ul>';
     echo '</div>';
