@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verify the password (since passwords are not hashed)
         if ($password === $user['password']) {
             // Save user information in session
-            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
 

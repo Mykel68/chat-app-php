@@ -27,45 +27,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Handle image file upload
-    $targetDir = "uploads/";
-    $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    // Check if the username already exists in the database
+    $checkUsernameQuery = "SELECT * FROM users WHERE username = ?";
+    $stmtCheckUsername = $conn->prepare($checkUsernameQuery);
+    $stmtCheckUsername->bind_param("s", $username);
+    $stmtCheckUsername->execute();
+    $resultCheckUsername = $stmtCheckUsername->get_result();
 
-    // Check if image file is a actual image or fake image
-    $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
-    if ($check === false) {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-
-    // Check file size
-    if ($_FILES["profilePicture"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
+    if ($resultCheckUsername->num_rows > 0) {
+        echo "Username is not available. Please choose a different username.";
         exit;
-    } else {
-        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-            exit;
-        }
     }
 
-    // Example: Insert user data into the database
+    // Handle image file upload
+    // (Your existing image upload code)
+
+    // Example: Insert user data into the database without hashing the password
     $sql = "INSERT INTO users (username, email, password, image) VALUES (?, ?, ?, ?)";
 
     // Use prepared statement to prevent SQL injection

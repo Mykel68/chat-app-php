@@ -41,13 +41,12 @@
                     placeholder=""
                 />
             </div>
-            <input type="submit" value="Login">
+            <input type="submit" value="Login" class="btn btn-success w-75">
+            
+            <div class="d-flex flex-column border-top mt-2">
+                New user? <a href="register.php" class="btn btn-secondary mt-2 w-75">Register</a>
+            </div>
         </form>
-
-        <a href="register.php" class="btn btn-secondary mt-2 w-25">Register</a>
-
-   
-
     </div>
 </body>
 </html>
