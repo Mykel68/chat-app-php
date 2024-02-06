@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-    <div class="d-flex flex-column bg-primary p-2">
-        <form action="login_process.php" method="post">
+    <div class="d-flex flex-column bg-primary  p-2 min-vh-100">
+        <form action="login_process.php" method="post" class=" mx-auto mt-5 bg-gradient p-5 border-ra">
 
         <?php
         session_start();
@@ -20,7 +20,7 @@
             unset($_SESSION['error_message']);
         }
         ?>
-        
+
             <div class="mb-3">
                 <label for="" class="form-label">Email</label>
                 <input

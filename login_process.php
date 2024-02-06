@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        // Verify the password
-        if ($user !== null && password_verify($password, $user['password'])) {
+        // Verify the password (since passwords are not hashed)
+        if ($password === $user['password']) {
             // Save user information in session
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
