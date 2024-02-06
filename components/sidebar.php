@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
 
     foreach ($users as $user) {
         echo '<li>';
-        echo '<img src="' . $user['image'] . '" alt="" onclick="startChatWithUser(' . $user['id'] . ', \'' . $user['username'] . '\')">';
+        echo '<img src="' . $user['image'] . '" alt="" onclick="displayUserInformation(' . $user['id'] . ', \'' . $user['username'] . '\', \'' . $user['image'] . '\')">';
         echo '<div class="online">';
         echo '<div class="online-presence"></div>';
         echo '<p> ' . $user['username'] . '</p>';

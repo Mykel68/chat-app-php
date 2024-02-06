@@ -8,7 +8,7 @@ if (!isset($_SESSION['id'])) {
 // Retrieve the user ID of the currently logged-in user
 $currentUserId = $_SESSION['id'];
 
-// Retrieve the current user from the database
+// Retrieve all users from the database excluding the current user
 $sql = "SELECT * FROM users WHERE id = ?";
 
 // Use prepared statement to prevent SQL injection
@@ -29,8 +29,8 @@ if ($result->num_rows > 0) {
     // Output the current user information
     echo '<div class="chat-top-bar ps-2">';
     echo '<div class="chat-top-bar-right">';
-    echo '<img id="chat-top-bar-image" src="' . $currentUser['image'] . '" alt="">';
-    echo '<p id="chat-top-bar-username">' . $currentUser['username'] . '</p>';
+    echo '<img id="chatUserImage" src="' . $currentUser['image'] . '" alt="">';
+    echo '<p id="chatUsername">' . $currentUser['username'] . '</p>';
     echo '</div>';
     echo '<div class="profile">';
     echo '<img src="' . $currentUser['image'] . '" alt="">';
@@ -40,5 +40,4 @@ if ($result->num_rows > 0) {
 } else {
     echo "User not found.";
 }
-
 ?>

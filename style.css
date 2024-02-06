@@ -69,15 +69,24 @@ body{
 .chat-container{
     width: calc(100% - 200px);
 }
-#chat-top-bar-username{
+#chatUsername{
     font-size: 20px;
     font-weight: bold;
     margin-left: 10px;
     color: #fee;
 }
+
 .chat-body{
     height: calc(80vh - 100px);
     overflow-y: scroll;
+}
+.chat-body p{
+    display: flex;
+    font-size: 24px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
 }
 .chat-body::-webkit-scrollbar-thumb{
     background-color: #111;

@@ -25,4 +25,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['userId'])) {
     echo "Invalid request.";
     exit;
 }
+
 ?>
