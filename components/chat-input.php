@@ -1,4 +1,4 @@
-<form action="sendMessage.php" method="post" class="border-top p-2 chat-input" enctype="multipart/form-data">
+<form action="send_message.php" method="post" class="border-top p-2 chat-input" enctype="multipart/form-data">
     <input type="text" name="message" placeholder="Type your message here...">
     
     <!-- Update your chat-input.php -->

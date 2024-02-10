@@ -19,5 +19,5 @@
 </div> -->
 
 <div class="chat-body" id="chatBody">
-    <p id="defaultMessage">Select a user from the sidebar to start a chat.</p>
+    <!-- <p id="defaultMessage">Select a user from the sidebar to start a chat.</p> -->
 </div>

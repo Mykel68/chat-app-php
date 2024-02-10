@@ -1,54 +1,17 @@
-function displayUserInformation(userId, username, userImage) {
-    // Update chat-top-bar with selected user's information
-    document.getElementById('chatUserImage').src = userImage;
-    document.getElementById('chatUsername').innerText = username;
+function displayUserInformation(id, username, image) {
+    // Update the chat-top-bar with the selected user information
+    document.getElementById('chatUserImage').src = image;
+    document.getElementById('chatUsername').innerHTML = username;
 
-    // Fetch and display chat messages for the selected user
-    startChatWithUser(userId, username);
-}
-
-function startChatWithUser(userId, username) {
-    // Replace the default message with the selected user's chat
-    document.getElementById('defaultMessage').style.display = 'none';
-
-    // Fetch chat messages for the selected user
-    fetch('getChatMessages.php?userId=' + userId)
+    // Fetch and display the chat for the selected user
+    fetch('getChatMessages.php?userId=' + id)
         .then(response => response.json())
-        .then(data => {
-            const chatMessagesContainer = document.getElementById('chatMessagesContainer');
-            chatMessagesContainer.innerHTML = ''; // Clear existing messages
+        .then(messages => {
+            // Update the chat body
+            updateChatBody(messages);
 
-            // Append fetched messages to the container
-            data.forEach(message => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = message.sender === userId ? 'sent' : 'recieve';
-
-                messageDiv.innerHTML = `
-                    <div class="${message.sender === userId ? 'sent' : 'recieve'}-msg">
-                        <p class="${message.sender === userId ? 'sent' : 'recieve'}-msg-text">${message.content}</p>
-                        <div class="${message.sender === userId ? 'sent' : 'recieve'}-time">
-                            <p class="msg-time">${message.timestamp}</p>
-                        </div>
-                    </div>
-                `;
-
-                chatMessagesContainer.appendChild(messageDiv);
-            });
+            // Remove the default message
+            document.getElementById('defaultMessage').style.display = 'none';
         })
-        .catch(error => {
-            console.error('Error fetching chat messages:', error);
-        });
+        .catch(error => console.error('Error fetching chat messages:', error));
 }
-
-    // Make sure to replace 'path/to/emoji-picker.js' with the correct path
-    const emojiPicker = new EmojiPicker({
-        emojiable_selector: '[data-emojiable=true]',
-        assetsPath: 'js/emoji-picker.js',
-        popupButtonClasses: 'fa',
-        events: {
-            keyup: function (editor, event) {
-                // Handle keyup events if needed
-            }
-        }
-    });
-    emojiPicker.discover();

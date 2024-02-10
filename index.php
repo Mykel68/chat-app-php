@@ -39,6 +39,9 @@
 <script src="js/main.js"></script>
 <script src="js/emoji-picker.js"></script>
 
+
+
+
 </html>
 
 <?php
